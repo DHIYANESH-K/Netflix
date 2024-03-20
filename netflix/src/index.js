@@ -9,6 +9,8 @@ root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
+
+  // if we use this everything happens twice in local but not in build production
 );
 
 // If you want to start measuring performance in your app, pass a function

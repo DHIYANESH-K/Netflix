@@ -4,14 +4,14 @@ import { checkValidateData } from "../utils/validate";
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword,} from "firebase/auth";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useDispatch } from "react-redux";
-import {addUser} from "../utils/userSlice";
 import { USER_AVATAR } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-  let dispatch=useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  let dispatch=useDispatch();
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
@@ -20,8 +20,6 @@ const Login = () => {
   const name = useRef(null);
 
   const handleButtonClick = () => {
-    // console.log(email.current);
-    // console.log(password.current);
     const message = isSignInForm
       ? checkValidateData(email.current.value, password.current.value)
       : checkValidateData(
@@ -31,7 +29,7 @@ const Login = () => {
         );
 
     setErrorMessage(message);
-    if (message) return;
+    if (message) return null;
     if (!isSignInForm) {
       //Sign Up logic
       createUserWithEmailAndPassword(
@@ -41,7 +39,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          updateProfile(user, {
+          updateProfile(auth.currentUser, {
             displayName:name.current.value,
             photoURL:USER_AVATAR
           }).then(() => {
@@ -50,12 +48,10 @@ const Login = () => {
           }).catch((error) => {
           setErrorMessage(error.message)
           });
-          // console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          // console.log(errorCode);
           setErrorMessage(errorCode + " - " + errorMessage);
         });
     } else {
@@ -112,9 +108,8 @@ const Login = () => {
           className="p-4 my-8 block w-full rounded-lg bg-gray-700"
         />
         <p className="">{errorMessage}</p>
-        <button
+        <button onClick={handleButtonClick}
           className="bg-red-700 p-4 my-8 rounded-lg w-full"
-          onClick={handleButtonClick}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>

@@ -35,11 +35,11 @@ const Header = () => {
     });
   }
   return (
-    <div className='absolute w-screen px-16 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
-        <img className='w-48' src={LOGO} alt="logo" />
+    <div className='absolute h-20 text-white w-full px-16 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
+        <img className='w-40' src={LOGO} alt="logo" />
         {user&&<div className='flex items-center gap-2'>
           <img className="w-8 h-8" alt="user-Icon" src={user.photoURL}></img>
-          <button className='font-bold' onClick={handleClick}>Sign Out</button>
+          <button onClick={handleClick} className='font-bold'>Sign Out</button>
         </div>}
     </div>
 
