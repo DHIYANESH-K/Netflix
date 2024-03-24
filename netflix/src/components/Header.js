@@ -29,13 +29,14 @@ const Header = () => {
 
   let handleClick=()=>{
     signOut(auth).then(() => {
+      
     }).catch((error) => {
       // An error happened.
       navigate("/error")
     });
   }
   return (
-    <div className='absolute h-20 text-white w-full px-16 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
+    <div className='absolute h-20 text-white w-full px-16 py-2 bg-gradient-to-b from-black flex justify-between'>
         <img className='w-40' src={LOGO} alt="logo" />
         {user&&<div className='flex items-center gap-2'>
           <img className="w-8 h-8" alt="user-Icon" src={user.photoURL}></img>

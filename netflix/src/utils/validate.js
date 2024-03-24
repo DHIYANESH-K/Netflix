@@ -8,7 +8,5 @@ export const checkValidateData=(email,password,name=0)=>{
     }
     if(!isEmailValid) return "Email Id is not valid";
     if(!isPasswordValid) return "Password is not valid";
-    
-
     return null;
 }
